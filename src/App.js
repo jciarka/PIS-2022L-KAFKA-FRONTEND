@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <p>API_URL: {process.env.REACT_APP_BACKEND_URL}</p>
       </header>
     </div>
   );
