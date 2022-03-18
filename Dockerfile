@@ -3,7 +3,7 @@
 # build (use correct version):
 #           docker build -t kafka-producer-front:0.0.1 .
 # run:
-#           sudo docker run --name kafka-front --env REACT_APP_BACKEND_URL=TEST_URL -d -p 3001:3000 kafka-producer-front:0.0.1
+#           sudo docker run --name kafka-front --env REACT_APP_BACKEND_URL=http://192.168.0.109:9090/ -d -p 3001:3000 kafka-producer-front:0.0.1
 
 # pull the base image
 FROM node:alpine

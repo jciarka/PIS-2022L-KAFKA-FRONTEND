@@ -1,7 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import { useEffect } from "react";
 
 function App() {
+
+
+// axios.defaults.proxy.host = process.env.REACT_APP_BACKEND_URL
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL
+
+const test = async() => {
+  const result = await axios.get('/api/test/')
+  console.log(result)
+}
+
+useEffect(() => {
+  test();
+}, []);
+
   return (
     <div className="App">
       <header className="App-header">
