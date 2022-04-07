@@ -1,0 +1,60 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout Scm') {
+      steps {
+        git(credentialsId: 'github/jciarka', url: 'https://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@github.com/jciarka/PIS-2022L-KAFKA-PROD-FRONT.git')
+      }
+    }
+
+    stage('Build project') {
+      steps {
+          sh '''# Build project
+npm i
+'''
+      }
+    }
+
+    stage('Build docker') {
+      steps {
+        withCredentials([usernamePassword(usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PWD', credentialsId: 'DOCKER_REPO')]) {
+          sh '''# Build docker image
+# tag with current version and with latest
+# push to docker repository
+
+docker login -u $DOCKER_USER -p $DOCKER_PWD
+
+PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: \'{ print $2 }\'| sed \'s/[",]//g\' | sed \'s/ //\')
+
+docker build -t pis-kafka-prod-front:$PACKAGE_VERSION .
+
+docker tag pis-kafka-prod-front:$PACKAGE_VERSION jciarka/pis-kafka-prod-front:$PACKAGE_VERSION
+docker push jciarka/pis-kafka-prod-front:$PACKAGE_VERSION
+
+docker tag pis-kafka-prod-front:$PACKAGE_VERSION jciarka/pis-kafka-prod-front:latest
+docker push jciarka/pis-kafka-prod-front:latest
+'''
+        }
+      }
+    }
+
+    stage('Clean docker') {
+      steps {
+        sh '''# Cleanup local images repository
+docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        sh '''#  Instal new version on current machine
+docker-compose -f docker-compose.yaml down
+docker-compose -f docker-compose.yaml up -d'''
+      }
+    }
+
+  }
+  triggers {
+    pollSCM('* * * * *')
+  }
+}
