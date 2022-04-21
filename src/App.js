@@ -9,10 +9,13 @@ function App() {
 // axios.defaults.proxy.host = process.env.REACT_APP_BACKEND_URL
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL
 
-const test = async() => {
-  const result = await axios.get('/api/test/')
-  console.log(result)
-}
+// const test = async() => {
+//   const result = await axios.get('/api/test/')
+//   console.log(result)
+// }
+
+let fetchedTest = axios.get(`/api/test`);
+
 
 useEffect(() => {
   test();
@@ -35,6 +38,7 @@ useEffect(() => {
         </a>
         <p>API_URL: {process.env.REACT_APP_BACKEND_URL}</p>
         <p>Greetings from our team</p>
+        <p>{fetchedTest.comment}</p>
       </header>
     </div>
   );
