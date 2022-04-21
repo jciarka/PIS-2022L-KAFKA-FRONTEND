@@ -34,6 +34,7 @@ useEffect(() => {
           Learn React
         </a>
         <p>API_URL: {process.env.REACT_APP_BACKEND_URL}</p>
+        <p>Greetings from our team</p>
       </header>
     </div>
   );
