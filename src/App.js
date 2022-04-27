@@ -24,6 +24,7 @@ useEffect(() => {
         Ordering app
       </h2>
       <Link to="/api/order/selgros">Order at Selgros</Link>
+      <Link to="/api/order/selgros/items">List of Selgros orders</Link>
       <Routes>
         <Route path="/api/order/selgros" element={<SelgrosOrderForm />} />
         <Route path="/api/order/selgros/items" element={<SelgrosList />} />
