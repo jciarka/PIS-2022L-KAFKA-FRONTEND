@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import React, { useEffect } from "react";
 
 import SelgrosOrderForm from './forms/SelgrosOrderForm';
@@ -20,6 +20,10 @@ useEffect(() => {
 
   return (
     <BrowserRouter>
+      <h2>
+        Ordering app
+      </h2>
+      <Link to="/api/order/selgros">Order at Selgros</Link>
       <Routes>
         <Route path="/api/order/selgros" element={<SelgrosOrderForm />} />
         <Route path="/api/order/selgros/items" element={<SelgrosList />} />
