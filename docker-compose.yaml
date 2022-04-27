@@ -1,7 +1,7 @@
 version: "3"
 services:
   pis-kafka-front:
-    image: jciarka/pis-kafka-prod-front:0.0.1
+    image: jciarka/pis-kafka-prod-front:latest
     ports:
       - "3001:3000"
     environment:
