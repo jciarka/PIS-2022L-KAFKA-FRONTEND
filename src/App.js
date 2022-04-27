@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, { useEffect } from "react";
 
 import SelgrosOrderForm from './forms/SelgrosOrderForm';
+import SelgrosList from './lists/SelgrosList';
 
 const App = () => {
 
@@ -21,6 +22,7 @@ useEffect(() => {
     <BrowserRouter>
       <Routes>
         <Route path="/api/order/selgros" element={<SelgrosOrderForm />} />
+        <Route path="/api/order/selgros/items" element={<SelgrosList />} />
       </Routes>
     </BrowserRouter>
   );
