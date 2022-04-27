@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import dayjs from 'dayjs';
+import 'dayjs/locale/en'
 
 export const editorTypes = {
     EDIT: "EDIT",
@@ -121,15 +123,7 @@ const SelgrosOrderForm = ({
               flatNumber
           },
           contactPhone: Number(contactPhone),
-          createdAt: [
-              currDate.getFullYear(),
-              currDate.getMonth() + 1,
-              currDate.getDate(),
-              currDate.getHours(),
-              currDate.getMinutes(),
-              currDate.getSeconds(),
-              Math.floor(currDate.getTime() / 1000)
-          ],
+          createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ss').toString(),
           items,
           remarks
         });
