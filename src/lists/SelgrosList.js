@@ -7,7 +7,7 @@ const SelgrosList = () => {
   const fetchItems = async () => {
     let result;
     let currDate = new Date();
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', { params: {dateFrom: 0, dateTo: Math.floor(currDate.getTime() / 1000)}});
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', { params: {dateFrom: 0, dateTo: currDate.getTime()}});
 
     if (result && result.data && result.data.success) {
       console.log(result);
