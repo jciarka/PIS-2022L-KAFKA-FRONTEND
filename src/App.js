@@ -1,43 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
 import axios from 'axios';
-import { useEffect } from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useEffect } from "react";
 
-function App() {
+import SelgrosOrderForm from './forms/SelgrosOrderForm';
+import SelgrosList from './lists/SelgrosList';
 
-
-// axios.defaults.proxy.host = process.env.REACT_APP_BACKEND_URL
-axios.defaults.baseURL = process.env.process.env.REACT_APP_BACKEND_CONS_URL
+const App = () => {
 
 const test = async() => {
-  const result = await axios.get('/api/test/')
+  let testUrl = process.env.REACT_APP_BACKEND_PROD_URL + '/api/test'
+  const result = await axios.get(testUrl)
   console.log(result)
 }
+
 
 useEffect(() => {
   test();
 }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>API_URL: {process.env.REACT_APP_BACKEND_CONS_URL}</p>
-        <p>Greetings from our development team</p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/api/order/selgros" element={<SelgrosOrderForm />} />
+        <Route path="/api/order/selgros/items" element={<SelgrosList />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
