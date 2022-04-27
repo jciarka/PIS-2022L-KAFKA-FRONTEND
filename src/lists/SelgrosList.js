@@ -8,8 +8,8 @@ const SelgrosList = () => {
     let result;
     let currDate = new Date();
     result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', { params: {dateFrom: 0, dateTo: currDate.getTime()}});
-
-    setItems(result)
+    console.log(result.data.items);
+    setItems(result.data.items)
   };
 
   useEffect(() => {
@@ -18,9 +18,14 @@ const SelgrosList = () => {
 
   return (
     <>
-      <div className="container justify-content-center">
-        {items.toString()}
-      </div>
+      {items.map((item) => {
+        return (
+          <div className="container justify-content-center">
+            Ean: {item.ean} Quantity: {item.quantity}
+          </div>
+        );
+      })}
+
     </>
   );
 };
