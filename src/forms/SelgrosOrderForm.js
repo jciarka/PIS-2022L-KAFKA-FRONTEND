@@ -128,7 +128,8 @@ const SelgrosOrderForm = ({
               currDate.getDate(),
               currDate.getHours(),
               currDate.getMinutes(),
-              currDate.getSeconds()
+              currDate.getSeconds(),
+              9999999
           ],
           items,
           remarks
