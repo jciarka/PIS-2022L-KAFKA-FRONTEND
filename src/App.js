@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 
 import SelgrosOrderForm from './forms/SelgrosOrderForm';
 import SelgrosList from './lists/SelgrosList';
+import Header from './components/Header'
+import SuppliersList from './components/Orders/SuppliersList'
 
 const App = () => {
 
@@ -20,13 +22,12 @@ useEffect(() => {
 
   return (
     <BrowserRouter>
-      <h2>
-        Ordering app
-      </h2>
-      <Link to="/api/order/selgros">Order at Selgros</Link>
+      <Header />
       <Routes>
-        <Route path="/api/order/selgros" element={<SelgrosOrderForm />} />
-        <Route path="/api/order/selgros/items" element={<SelgrosList />} />
+        <Route path="/customerApp/selgros" element={<SelgrosOrderForm />} />
+        <Route path="/aggregatorApp/selgros" element={<SelgrosList />} />
+        <Route path="/customerapp" element={<SuppliersList type={"customerApp"} />} />
+        <Route path="/aggregatorapp" element={<SuppliersList type={"aggregatorApp"}/>} />
       </Routes>
     </BrowserRouter>
   );

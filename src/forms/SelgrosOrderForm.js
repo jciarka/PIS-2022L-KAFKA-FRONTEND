@@ -105,8 +105,7 @@ const SelgrosOrderForm = ({
       if (validateRemarks() !== "") return false;
       return true;
     };
-    
-  
+      
     const submit = async () => {
         let currDate = new Date();
         try {
@@ -182,11 +181,6 @@ const SelgrosOrderForm = ({
           className="card m-4 p-4 rounded rounded-lg w-100 shadow border rounded-0"
           style={{ border: "#8f8f8fb6" }}
         >
-          {/* {header && (
-            <div className=" text-center">
-              <h4>{header}</h4>
-            </div>
-          )} */}
           <h2>New Selgros order</h2>
 
           <h4>Purchaser's code</h4>
