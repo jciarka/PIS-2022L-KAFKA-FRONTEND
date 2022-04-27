@@ -111,7 +111,7 @@ const SelgrosOrderForm = ({
     const submit = async () => {
         let currDate = new Date();
         try {
-        const result = await axios.post("/api/order/selgros", {
+        const result = await axios.post(process.env.REACT_APP_PRODUCER_BACKEND_URL + "/api/order/selgros", {
           ...order,
           purchasersCode: Number(purchasersCode),
           deliveryAddress: {
@@ -141,9 +141,18 @@ const SelgrosOrderForm = ({
           result.data &&
           result.data.success) 
           {
-          setPurchasersCode(0);
-          setContactPhone(0);
-          setRemarks(null);
+            setBuildingNumber(null);
+            setCity(null);
+            setContactPhone(null);
+            setCountryCode(null);
+            setEan(null);
+            setFlatNumber(null);
+            setItems([]);
+            setPostalCode(null);
+            setPurchasersCode(null);
+            setQuantity(null);
+            setRemarks(null);
+            setStreet(null);
         } else {
           setBackendErrors(result.data.errors);
           return;
