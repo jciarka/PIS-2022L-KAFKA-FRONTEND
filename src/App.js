@@ -8,7 +8,7 @@ import SelgrosList from './lists/SelgrosList';
 const App = () => {
 
 const test = async() => {
-  let testUrl = process.env.REACT_APP_BACKEND_PROD_URL + '/api/test'
+  let testUrl = process.env.REACT_APP_BACKEND_PROD_URL + '/api/test/SelgrosOrderExample'
   const result = await axios.get(testUrl)
   console.log(result)
 }

@@ -6,7 +6,8 @@ const SelgrosList = () => {
 
   const fetchItems = async () => {
     let result;
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items');
+    let currDate = new Date();
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', {dateFrom: 0, dateTo: currDate.getTime()});
 
     if (result && result.data && result.data.success) {
       console.log(result);
