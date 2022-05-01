@@ -44,15 +44,6 @@ docker push jciarka/pis-kafka-prod-front:latest
 docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
       }
     }
-
-    stage('Deploy') {
-      steps {
-        sh '''#  Instal new version on current machine
-docker-compose -f docker-compose.yaml down
-docker-compose -f docker-compose.yaml up -d'''
-      }
-    }
-
   }
   triggers {
     pollSCM('* * * * *')
