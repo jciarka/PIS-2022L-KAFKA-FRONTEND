@@ -6,16 +6,10 @@ const SelgrosList = () => {
 
   const fetchItems = async () => {
     let result;
-    result = await axios.get(process.env.REACT_APP_CONSUMER_BACKEND_URL + '/api/order/selgros/items');
-
-    if (result && result.data && result.data.success) {
-      console.log(result);
-      setItems(
-        result.data.model.map((x) => {
-          return { ...x, expanded: false, detailsFetched: false };
-        })
-      );
-    }
+    let currDate = new Date();
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', { params: {dateFrom: 0, dateTo: currDate.getTime()}});
+    console.log(result.data.items);
+    setItems(result.data.items)
   };
 
   useEffect(() => {
@@ -24,17 +18,14 @@ const SelgrosList = () => {
 
   return (
     <>
-      <div className="container justify-content-center">
+      {items.map((item) => {
+        return (
+          <div className="container justify-content-center">
+            Ean: {item.ean} Quantity: {item.quantity}
+          </div>
+        );
+      })}
 
-        {items.map((chatData, index) => {
-          return (
-            <div key={index} className="row justify-content-center">
-                {chatData}        
-            </div>
-          );
-        })}
-
-      </div>
     </>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import dayjs from 'dayjs';
+import 'dayjs/locale/en'
 
 export const editorTypes = {
     EDIT: "EDIT",
@@ -105,12 +107,11 @@ const SelgrosOrderForm = ({
       if (validateRemarks() !== "") return false;
       return true;
     };
-    
-  
+      
     const submit = async () => {
         let currDate = new Date();
         try {
-        const result = await axios.post(process.env.REACT_APP_PRODUCER_BACKEND_URL + "/api/order/selgros", {
+        const result = await axios.post(process.env.REACT_APP_BACKEND_PROD_URL + "/api/order/selgros", {
           ...order,
           purchasersCode: Number(purchasersCode),
           deliveryAddress: {
@@ -122,15 +123,7 @@ const SelgrosOrderForm = ({
               flatNumber
           },
           contactPhone: Number(contactPhone),
-          createdAt: [
-              currDate.getFullYear(),
-              currDate.getMonth() + 1,
-              currDate.getDate(),
-              currDate.getHours(),
-              currDate.getMinutes(),
-              currDate.getSeconds(),
-              currDate.getTime()
-          ],
+          createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ss').toString(),
           items,
           remarks
         });
@@ -182,11 +175,6 @@ const SelgrosOrderForm = ({
           className="card m-4 p-4 rounded rounded-lg w-100 shadow border rounded-0"
           style={{ border: "#8f8f8fb6" }}
         >
-          {/* {header && (
-            <div className=" text-center">
-              <h4>{header}</h4>
-            </div>
-          )} */}
           <h2>New Selgros order</h2>
 
           <h4>Purchaser's code</h4>
