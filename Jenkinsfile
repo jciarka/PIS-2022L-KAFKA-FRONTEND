@@ -61,6 +61,7 @@ docker-compose -f docker-compose.yaml up -d'''
         to: 'jakub.ciarka.stud@pw.edu.pl'
       }
     }
+    
   }
   triggers {
     pollSCM('* * * * *')
