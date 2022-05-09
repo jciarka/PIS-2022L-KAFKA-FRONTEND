@@ -65,9 +65,10 @@ docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
 	  <div class="card-body">
 		  <h2>Projekt PIS</h2></br>
 	  
-		  <h4>$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS</h4></br>
+		  <h4>$PROJECT_NAME - Build # $BUILD_NUMBER </br> 
+      Has bean released with status: $BUILD_STATUS</h4></br>
 		  
-		  <h6>Dostępne akcje:</h6>
+		  <h6>Available actions:</h6>
 		  
 		  <a href="http://localhost:8888/job/docker%20ci-cd%20pis-frontend-jenkinsfile/"> 
 		  	<button type="button" class="btn btn-warning">Jenkins project site</button>
