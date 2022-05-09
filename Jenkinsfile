@@ -53,7 +53,7 @@ docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
         <>
         ''', 
         subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', 
-        to: 'jakub.ciarka.stud@pw.edu.pl'
+        to: '01104656@pw.edu.pl'
       }
     }
 
