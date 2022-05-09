@@ -47,10 +47,38 @@ docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
 
     stage('Notify') {
       steps {
-        emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-        Check console output at $BUILD_URL to view the results.
-        
-        <>
+        emailext body: '''
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
+    
+  </head>
+  <body>
+  
+  <div class="container m-4 jusutify-content-center">
+  
+  	<div class="card" style="width: 40rem;">
+	  <div class="card-body">
+	  
+		  <h4>$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS</h4></br>
+		  
+		  <h6>$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS</h6></br>
+		  
+		  <a href="http://localhost:8888/job/docker%20ci-cd%20pis-frontend-jenkinsfile/"> 
+		  	<button type="button" class="btn btn-warning">Deploy appliation</button>
+	  	  </a>
+		  <a href="http://localhost:8888/job/docker%20deployment%20pis-frontend-jenkinsfile/build?token=frontend" > 
+		  	<button type="button" class="btn btn-primary">Deploy appliation</button>
+	  	  </a> 
+	  </div>
+	</div>
+  </div>
+  </body>
+</html>        
         ''', 
         subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', 
         to: '01104656@pw.edu.pl'
