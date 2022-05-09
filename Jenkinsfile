@@ -45,23 +45,18 @@ docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
       }
     }
 
-    stage('Deploy') {
-      steps {
-        sh '''#  Instal new version on current machine
-docker-compose -f docker-compose.yaml down
-docker-compose -f docker-compose.yaml up -d'''
-      }
-    }
-
     stage('Notify') {
       steps {
         emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-        Check console output at $BUILD_URL to view the results.''', 
+        Check console output at $BUILD_URL to view the results.
+        
+        <>
+        ''', 
         subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', 
         to: 'jakub.ciarka.stud@pw.edu.pl'
       }
     }
-    
+
   }
   triggers {
     pollSCM('* * * * *')
