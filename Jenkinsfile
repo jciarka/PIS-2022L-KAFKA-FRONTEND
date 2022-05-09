@@ -63,17 +63,21 @@ docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
   
   	<div class="card" style="width: 40rem;">
 	  <div class="card-body">
+		  <h2>Projekt PIS</h2></br>
 	  
 		  <h4>$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS</h4></br>
 		  
-		  <h6>$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS</h6></br>
+		  <h6>Dostępne akcje:</h6>
 		  
 		  <a href="http://localhost:8888/job/docker%20ci-cd%20pis-frontend-jenkinsfile/"> 
-		  	<button type="button" class="btn btn-warning">Deploy appliation</button>
+		  	<button type="button" class="btn btn-warning">Jenkins project site</button>
 	  	  </a>
+		  <a href="https://github.com/jciarka/PIS-2022L-KAFKA-PROD-FRONT/"> 
+		  	<button type="button" class="btn btn-warning">Github project site</button>
+      </a>
 		  <a href="http://localhost:8888/job/docker%20deployment%20pis-frontend-jenkinsfile/build?token=frontend" > 
 		  	<button type="button" class="btn btn-primary">Deploy appliation</button>
-	  	  </a> 
+      </a> 
 	  </div>
 	</div>
   </div>
