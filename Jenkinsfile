@@ -52,10 +52,38 @@ docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
 <html>
 <head>
     <meta charset="utf-8" />
+	<style>
+	.card {
+	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	  padding: 10px;
+	  transition: 0.3s;
+	  display: flex;
+	  flex-wrap: wrap;
+	  align-content: center;
+	  background-color: #f5f7fa;
+	}
+	
+	div.a {
+	  text-align: center;
+	}
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
-    
+	.card:hover {
+	  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	}
+
+	.container {
+	  padding: 2px 16px;
+	}
+
+	body {
+	  font-family: Helvetica, Arial, sans-serif;
+	}
+
+	a {
+	  background-color: #1F7F4C; font-size: 18px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; text-decoration: none; padding: 5px 10px; color: #ffffff; border-radius: 5px; display: inline-block; mso-padding-alt: 0;>
+	}
+
+	</style>
   </head>
   <body>
   
@@ -63,21 +91,21 @@ docker rmi -f $(docker images -q jciarka/pis-kafka-prod-front) || true'''
   
   	<div class="card" style="width: 40rem;">
 	  <div class="card-body">
-		  <h2>Projekt PIS</h2></br>
+		  <h2>Project PIS</h2>
 	  
-		  <h4>$PROJECT_NAME - Build # $BUILD_NUMBER </br> 
-      Has bean released with status: $BUILD_STATUS</h4></br>
+		  <h4>$PROJECT_NAME - Build # $BUILD_NUMBER </br>
+		  Has been released with status: $BUILD_STATUS</h4>
 		  
-		  <h6>Available actions:</h6>
+		  <h4>Available actions:</h4>
 		  
 		  <a href="http://localhost:8888/job/docker%20ci-cd%20pis-frontend-jenkinsfile/"> 
-		  	<button type="button" class="btn btn-warning">Jenkins project site</button>
+		  	Jenkins project site
 	  	  </a>
 		  <a href="https://github.com/jciarka/PIS-2022L-KAFKA-PROD-FRONT/"> 
-		  	<button type="button" class="btn btn-warning">Github project site</button>
+		  	Github project site
       </a>
 		  <a href="http://localhost:8888/job/docker%20deployment%20pis-frontend-jenkinsfile/build?token=frontend" > 
-		  	<button type="button" class="btn btn-primary">Deploy appliation</button>
+		  	Deploy appliation
       </a> 
 	  </div>
 	</div>
