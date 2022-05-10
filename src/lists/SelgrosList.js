@@ -3,6 +3,7 @@ import axios from "axios";
 
 const SelgrosList = () => {
   const [items, setItems] = useState([]);
+  let counter = 0;
 
   const fetchItems = async () => {
     let result;
@@ -18,14 +19,27 @@ const SelgrosList = () => {
 
   return (
     <>
-      {items.map((item) => {
-        return (
-          <div className="container justify-content-center">
-            Ean: {item.ean} Quantity: {item.quantity}
-          </div>
-        );
-      })}
-
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ean</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => {
+            counter = counter + 1;
+            return (
+              <tr>
+                <th scope="row">{counter}</th>
+                <td>{item.ean}</td>
+                <td>{item.quantity}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 };
