@@ -9,8 +9,13 @@ pipeline {
 
     stage('SonarQube analysis') {
       steps {
-        withSonarQubeEnv('SonarQube') {
-          sh "./gradlew sonarqube"
+        script{
+            def scannerHome = tool 'sonarscan';
+            withSonarQubeEnv('SonarQube') {
+                sh "${tool("sonarscan")}/bin/sonar-scanner \
+                    -Dsonar.projectKey=reactapp \
+                    -Dsonar.projectName=reactapp"
+            }
         }
       }
     }
