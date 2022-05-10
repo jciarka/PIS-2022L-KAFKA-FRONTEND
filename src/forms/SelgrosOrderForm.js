@@ -16,58 +16,56 @@ const SelgrosOrderForm = ({
     type = editorTypes.NEW,
     header
 }) => {
-    const [purchasersCode, setPurchasersCode] = useState(order ? order.purchasersCode : null);
+    const [purchasersCode, setPurchasersCode] = useState(order ? order.purchasersCode : "");
     const validateCode = () => {
-      if (purchasersCode === 0)
+      if (purchasersCode === "" || isNaN(Number(purchasersCode)))
         return "Purchaser's code cannot be void";
       else return 0;
     };
   
-    const [countryCode, setCountryCode] = useState(order ? order.countryCode : null);
+    const [countryCode, setCountryCode] = useState(order ? order.countryCode : "");
     const validateCountryCode = () => {
-      if (countryCode === null || countryCode === "")
+      if (countryCode === "")
         return "Delivery address cannot be void";
       else return 0;
     };
 
-    const [city, setCity] = useState(order ? order.city : null);
+    const [city, setCity] = useState(order ? order.city : "");
     const validateCity = () => {
-      if (city === null || city === "")
+      if (city === "")
         return "Delivery address cannot be void";
       else return 0;
     };
 
-    const [postalCode, setPostalCode] = useState(order ? order.postalCode : null);
+    const [postalCode, setPostalCode] = useState(order ? order.postalCode : "");
     const validatePostalCode = () => {
-      if (postalCode === null || postalCode === "")
+      if (postalCode === "")
         return "Delivery address cannot be void";
       else return 0;
     };
 
-    const [street, setStreet] = useState(order ? order.street : null);
+    const [street, setStreet] = useState(order ? order.street : "");
     const validateStreet = () => {
-      if (street === null || street === "")
+      if (street === "")
         return "Delivery address cannot be void";
       else return 0;
     };
     
-    const [buildingNumber, setBuildingNumber] = useState(order ? order.buildingNumber : null);
+    const [buildingNumber, setBuildingNumber] = useState(order ? order.buildingNumber : "");
     const validateBuildingNumber = () => {
-      if (buildingNumber === null || buildingNumber === "")
+      if (buildingNumber === "")
         return "Delivery address cannot be void";
       else return 0;
     };
 
-    const [flatNumber, setFlatNumber] = useState(order ? order.flatNumber : null);
+    const [flatNumber, setFlatNumber] = useState(order ? order.flatNumber : "");
     const validateFlatNumber = () => {
-      if (flatNumber === null || flatNumber === "")
-        return "Delivery address cannot be void";
-      else return 0;
+      return 0;
     };
 
-    const [contactPhone, setContactPhone] = useState(order ? order.contactPhone : null);
+    const [contactPhone, setContactPhone] = useState(order ? order.contactPhone : "");
     const validateContactPhone = () => {
-      if (contactPhone === null || contactPhone === "" || isNaN(Number(contactPhone)))
+      if (contactPhone === "" || isNaN(Number(contactPhone)))
         return "Contact phone cannot be void";
       else return 0;
     };
@@ -79,23 +77,23 @@ const SelgrosOrderForm = ({
       else return 0;
     };
 
-    const [remarks, setRemarks] = useState(order ? order.remarks : null);
+    const [remarks, setRemarks] = useState(order ? order.remarks : "");
     const validateRemarks = () => {
-      if (remarks === null || remarks === "")
+      if (remarks === "")
         return "Remarks cannot be void";
       else return 0;
     };
 
-    const [ean, setEan] = useState(null);
+    const [ean, setEan] = useState("");
     const validateEan = () => {
-      if (ean === null || ean === "")
+      if (ean === "")
         return "Ean cannot be void";
       else return 0;
     };
 
-    const [quantity, setQuantity] = useState(null);
+    const [quantity, setQuantity] = useState("");
     const validateQuantity = () => {
-      if (quantity === null || quantity === "" || isNaN(Number(quantity)))
+      if (quantity === "" || isNaN(Number(quantity)))
         return "Quantity cannot be void";
       else return 0;
     };
@@ -145,18 +143,19 @@ const SelgrosOrderForm = ({
   
         if (result) 
           {
-            setBuildingNumber(null);
-            setCity(null);
-            setContactPhone(null);
-            setCountryCode(null);
-            setEan(null);
-            setFlatNumber(null);
+            console.log(result);
+            setBuildingNumber("");
+            setCity("");
+            setContactPhone("");
+            setCountryCode("");
+            setEan("");
+            setFlatNumber("");
             setItems([]);
-            setPostalCode(null);
-            setPurchasersCode(null);
-            setQuantity(null);
-            setRemarks(null);
-            setStreet(null);
+            setPostalCode("");
+            setPurchasersCode("");
+            setQuantity("");
+            setRemarks("");
+            setStreet("");
           } else {
             setBackendErrors(result.data.errors);
           return;
@@ -187,7 +186,7 @@ const SelgrosOrderForm = ({
     return (
       <div
         className="container d-flex justify-content-center"
-        style={{ "max-width": 800 }}
+        style={{ "maxWidth": 800 }}
       >
         <div
           className="card m-4 p-4 rounded rounded-lg w-100 shadow border rounded-0"
@@ -203,7 +202,7 @@ const SelgrosOrderForm = ({
               <input
                 type="text"
                 className="form-control"
-                placeholder="Purchaser's code"
+                placeholder="102"
                 value={purchasersCode}
                 onChange={(e) => {
                   setPurchasersCode(e.target.value);
@@ -327,7 +326,7 @@ const SelgrosOrderForm = ({
               <input
                 type="text"
                 className="form-control"
-                placeholder=""
+                placeholder="5012345678900"
                 value={ean}
                 onChange={(e) => {
                   setEan(e.target.value);
@@ -340,7 +339,7 @@ const SelgrosOrderForm = ({
               <input
                 type="text"
                 className="form-control"
-                placeholder=""
+                placeholder="1"
                 value={quantity}
                 onChange={(e) => {
                   setQuantity(e.target.value);
@@ -349,7 +348,7 @@ const SelgrosOrderForm = ({
               />
             </div>
 
-            <div class="item-button">
+            <div className="item-button">
               <button
                 disabled={!validateItem()}
                 type="submit"
