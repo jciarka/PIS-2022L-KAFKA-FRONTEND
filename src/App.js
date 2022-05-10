@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, { useEffect } from "react";
 
 import SelgrosOrderForm from './forms/SelgrosOrderForm';
@@ -27,7 +27,6 @@ useEffect(() => {
 }, []);
   return (
     <BrowserRouter>
-      <h1>To jest test</h1>
       <Header />
       <Routes>
         <Route path="/customerApp/selgros" element={<SelgrosOrderForm />} />
