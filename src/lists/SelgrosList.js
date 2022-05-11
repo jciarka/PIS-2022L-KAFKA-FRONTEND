@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import dayjs from 'dayjs';
+import 'dayjs/locale/en'
 
 const SelgrosList = () => {
   const [items, setItems] = useState([]);
@@ -7,9 +9,10 @@ const SelgrosList = () => {
 
   const fetchItems = async () => {
     let result;
-    let currDate = new Date();
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', { params: {dateFrom: 0, dateTo: currDate.getTime()}});
-    console.log(result.data.items);
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', 
+                          { params: {dateFrom: dayjs(0).format('YYYY-MM-DDTHH:mm:ss').toString(), 
+                            dateTo: dayjs().format('YYYY-MM-DDTHH:mm:ss').toString()}});
+
     setItems(result.data.items)
   };
 
@@ -18,8 +21,10 @@ const SelgrosList = () => {
   }, []);
 
   return (
-    <>
-      <table class="table">
+    <div
+      className="container d-flex justify-content-center"
+      style={{ "maxWidth": 1000 }}>
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -40,7 +45,7 @@ const SelgrosList = () => {
           })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

@@ -28,8 +28,8 @@ const suppliers = [
 var SuppliersList = ({type}) => {
   return (
     <>
-    <div class="container mt-4">
-      <div class="d-flex justify-content-between">
+    <div className="container mt-4">
+      <div className="d-flex justify-content-between">
         {
           suppliers.map(supplier => 
             <Link key={supplier.path} to={`/${type}/${supplier.path}`}> 
