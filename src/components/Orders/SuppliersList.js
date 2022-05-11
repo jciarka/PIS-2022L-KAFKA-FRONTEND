@@ -33,8 +33,7 @@ var SuppliersList = ({type}) => {
         {
           suppliers.map(supplier => 
             <Link key={supplier.path} to={`/${type}/${supplier.path}`}> 
-              <Box
-                
+              <Box            
                 sx={{
                   width: 200,
                   height: 200,

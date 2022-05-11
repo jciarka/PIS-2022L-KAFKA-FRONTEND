@@ -27,7 +27,6 @@ const SelgrosList = () => {
 
   const fetchItems = async () => {
     let result;
-    let currDate = new Date();
     result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', { params: {dateFrom, dateTo, purchasersCode, ean}});
     console.log(result.data.items);
     setItems(result.data.items)
@@ -93,25 +92,6 @@ const SelgrosList = () => {
                 renderInput={(params) => <TextField  value={"text"} size="small" {...params} />}
               />
             </div>
-
-            {/* <Select
-              size="small"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={topic}
-              label="EAN"
-              onChange={(e) => {
-                setTopic(e.target.value);
-              }}
-            >
-              {topics.map((t) => {
-                return (
-                  <MenuItem key={t} value={t}>
-                    {t}
-                  </MenuItem>
-                );
-              })}
-            </Select> */}
           </div>
           </LocalizationProvider>
         </FormControl>
