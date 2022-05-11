@@ -1,11 +1,17 @@
 import axios from 'axios';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React, { useEffect } from "react";
 
 import SelgrosOrderForm from './forms/SelgrosOrderForm';
 import SelgrosList from './lists/SelgrosList';
 import Header from './components/Header'
 import SuppliersList from './components/Orders/SuppliersList'
+
+export const fetchSelgrosOrderExample = async query => {
+  const url = process.env.REACT_APP_BACKEND_PROD_URL + '/api/test/SelgrosOrderExample';
+
+  return await axios.get(url);
+};
 
 const App = () => {
 

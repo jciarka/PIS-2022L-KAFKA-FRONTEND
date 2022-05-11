@@ -17,6 +17,7 @@ import Paper from '@mui/material/Paper';
 
 const SelgrosList = () => {
   const [items, setItems] = useState([]);
+  let counter = 0;
 
   const [ean, setEan] = useState(null);
   const [purchasersCode, setPurchasersCode] = useState(null);
