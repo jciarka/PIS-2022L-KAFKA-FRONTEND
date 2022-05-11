@@ -98,8 +98,6 @@ const SelgrosOrderForm = ({
       else return 0;
     };
 
-    const [backendErrors, setBackendErrors] = useState([]);
-
     const [itemsNum, setItemsNum] = useState(0);
 
     const validateAll = () => {
@@ -124,26 +122,25 @@ const SelgrosOrderForm = ({
       
     const submit = async () => {
         try {
-        const result = await axios.post(process.env.REACT_APP_BACKEND_PROD_URL + "/api/order/selgros", {
-          ...order,
-          purchasersCode: Number(purchasersCode),
-          deliveryAddress: {
-              countryCode,
-              city,
-              postalCode,
-              street,
-              buildingNumber,
-              flatNumber
-          },
-          contactPhone: Number(contactPhone),
-          createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ss').toString(),
-          items,
-          remarks
-        });
-  
-        if (result) 
+          const result = await axios.post(process.env.REACT_APP_BACKEND_PROD_URL + "/api/order/selgros", {
+            ...order,
+            purchasersCode: Number(purchasersCode),
+            deliveryAddress: {
+                countryCode,
+                city,
+                postalCode,
+                street,
+                buildingNumber,
+                flatNumber
+            },
+            contactPhone: Number(contactPhone),
+            createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ss').toString(),
+            items,
+            remarks
+          });
+    
+          if (result) 
           {
-            console.log(result);
             setBuildingNumber("");
             setCity("");
             setContactPhone("");
@@ -156,20 +153,10 @@ const SelgrosOrderForm = ({
             setQuantity("");
             setRemarks("");
             setStreet("");
-          } else {
-            setBackendErrors(result.data.errors);
-          return;
-        }
-  
-        if (onSuccess) {
-          onSuccess(result.data.model);
-        }
+          }    
       } catch (e) {
-        if (e.response) {
-          setBackendErrors([e.message]);
-        } else {
-          setBackendErrors(e);
-        }
+        console.log(e);
+        alert("Order not send");
       }
     };
 
@@ -390,35 +377,6 @@ const SelgrosOrderForm = ({
               />
             </div>
           </div>
-
-          {backendErrors && backendErrors.length > 0 && (
-            <div className="pb-2 alert alert-danger p-0 d-flex align-items-center">
-              <div className="text-center w-100" role="alert">
-                {backendErrors.map((error, index) => {
-                  return (
-                    <div key={index}>
-                      <label>{error}</label>
-                    </div>
-                  );
-                })}
-              </div>
-              <div
-                className="close small m-1 p-1 align-middle"
-                data-dismiss="alert"
-                style={{ fontSize: "20px", display: "block" }}
-              >
-                <span
-                  style={{ display: "block" }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setBackendErrors([]);
-                  }}
-                >
-                  &times;
-                </span>
-              </div>
-            </div>
-          )}
   
           <div className="mt-2 w-100 text-center">
             <button
