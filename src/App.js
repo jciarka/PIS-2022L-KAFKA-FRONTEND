@@ -7,6 +7,8 @@ import SelgrosList from './lists/SelgrosList';
 import Header from './components/Header'
 import SuppliersList from './components/Orders/SuppliersList'
 
+import './App.css'
+
 export const fetchSelgrosOrderExample = async query => {
   const url = process.env.REACT_APP_BACKEND_PROD_URL + '/api/test/SelgrosOrderExample';
 

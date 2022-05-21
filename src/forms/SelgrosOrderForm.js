@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/en'
 import './Form.css'
 import { ReactComponent as CancelIcon } from '../icons/cancel.svg'
+import '../mystyles.css'
 
 export const editorTypes = {
     EDIT: "EDIT",
@@ -176,7 +177,7 @@ const SelgrosOrderForm = ({
         style={{ "maxWidth": 800 }}
       >
         <div
-          className="card m-4 p-4 rounded rounded-lg w-100 shadow border rounded-0"
+          className="card m-4 p-4 rounded rounded-lg w-100 panel"
           style={{ border: "#8f8f8fb6" }}
         >
           <div className="m-2 w-100 text-center">
@@ -339,7 +340,7 @@ const SelgrosOrderForm = ({
               <button
                 disabled={!validateItem()}
                 type="submit"
-                className="btn btn-primary rounded-0"
+                className="btn btn-primary form-button"
                 onClick={(e) => addItem()}
               >
                 Add item
@@ -382,8 +383,9 @@ const SelgrosOrderForm = ({
             <button
               disabled={!validateAll()}
               type="submit"
-              className="btn btn-primary rounded-0"
+              className="btn btn-primary form-button"
               onClick={(e) => submit()}
+              style={{'marginTop': '2vh'}}
             >
               Create
             </button>

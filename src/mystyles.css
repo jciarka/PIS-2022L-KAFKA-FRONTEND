@@ -1,0 +1,29 @@
+.panel {
+    box-shadow: 0 8px 32px 0 rgba(20, 20, 20, 0.596);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(34, 34, 34, 0.5);
+    background-color: rgba(68, 68, 68, 0.404);
+    color: white;
+}
+
+.big {
+    border-radius: 10px;
+}
+
+.small {
+    border-radius: 5px;
+}
+
+.form-control {
+    box-shadow: 0 8px 32px 0 rgba(20, 20, 20, 0.596);
+}
+
+.form-control::placeholder {
+    font-style: italic;
+    color: rgb(153, 153, 153);
+}
+
+.form-button {
+    box-shadow: 0 8px 32px 0 rgba(20, 20, 20, 0.596);
+    color: white;
+}

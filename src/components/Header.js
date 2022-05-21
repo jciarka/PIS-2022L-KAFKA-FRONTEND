@@ -11,18 +11,6 @@ var Header = () => {
         className="navbar navbar-expand-lg navbar-light shadow shadow-sm border-bottom border-dark"
         style={{ border: "#8f8f8fb6" }}
       >
-        <Link to="/">
-          <button
-            className="btn btn-light rounded-circle btn-primary p-0"
-            style={{
-              display: "block",
-              width: "40px",
-              height: "40px",
-            }}
-          >
-  
-          </button>
-        </Link>
         {/*<!-- Links -->*/}
         <div className="navbar-brand text-center m-0 p-0">
           <div className=" m-0 p-0">
@@ -30,7 +18,8 @@ var Header = () => {
               {
                 'marginLeft': '20px',
                 'marginTop': '10px',
-                'fontSize':'25px'
+                'fontSize':'25px',
+                'color':'white'
               }
             }>
               {" "}
@@ -41,19 +30,17 @@ var Header = () => {
                 <>
                   <Link to="/customerApp">
                     <button
-                      className="btn btn-dark nav-button rounded-0"
+                      className="btn btn-dark nav-button small panel"
                       style={{ position: "relative", top: "9px" }}
                     >
-                      {/* <img src={RestaurantLogo} width="20" height="20" alt=""/> */}
                       Customers App
                     </button>
                   </Link>
                   <Link to="/aggregatorApp">
                     <button
-                      className="btn btn-dark nav-button rounded-0"
+                      className="btn btn-dark nav-button small panel"
                       style={{ position: "relative", top: "9px" }}
                     >
-                      {/* <img src={HistoryLogo} width="20" height="20" alt=""/> */}
                       Aggregated orders
                     </button>
                   </Link>   

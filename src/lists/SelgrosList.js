@@ -15,6 +15,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+import '../mystyles.css'
+
 const SelgrosList = () => {
   const [items, setItems] = useState([]);
   let counter = 0;
@@ -36,7 +38,7 @@ const SelgrosList = () => {
   return (
     <div className="container">
       <div
-        className="card m-4 p-4 rounded rounded-lg w-100 shadow border rounded-0"
+        className="card m-4 p-4 w-100 big panel"
         style={{ border: "#8f8f8fb6" }}
       >
         <div className="row justify-content-center mb-2">
@@ -82,14 +84,14 @@ const SelgrosList = () => {
               />
             </div>
             <div className="px-2 col-3">
-              <DatePicker
+              <DatePicker              
                 size="small"
                 label="Date to"
                 clearable
                 inputFormat="YYYY-MM-DD"
                 value={dateTo}
                 onChange={e => e ? setDateTo(dayjs(e).format('YYYY-MM-DDTHH:mm:ss')) : setDateTo(null)}
-                renderInput={(params) => <TextField  value={"text"} size="small" {...params} />}
+                renderInput={(params) => <TextField sx={{color: 'white'}}  value={"text"} size="small" {...params} />}
               />
             </div>
           </div>

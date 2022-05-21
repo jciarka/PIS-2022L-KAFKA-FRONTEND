@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
+import '../../mystyles.css'
 
 const suppliers = [
   {
@@ -37,13 +38,11 @@ var SuppliersList = ({type}) => {
                 sx={{
                   width: 200,
                   height: 200,
-                  backgroundColor: 'black',
                   '&:hover': {
-                    backgroundColor: 'grey.main',
-                    opacity: [0.9, 0.8, 0.7],
+                    opacity: [0.8, 0.7, 0.6],
                   },
                 }}
-                className="d-flex justify-content-center align-items-center"
+                className="d-flex justify-content-center align-items-center big panel"
                 >
                   <div>
                     <strong style={{color: "white", fontSize: "30px"}}>{supplier.name}</strong>
