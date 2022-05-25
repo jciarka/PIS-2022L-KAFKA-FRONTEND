@@ -4,13 +4,6 @@
     border: 1px solid rgba(34, 34, 34, 0.5);
     background-color: rgba(68, 68, 68, 0.404);
     color: white;
-}
-
-.big {
-    border-radius: 10px;
-}
-
-.small {
     border-radius: 5px;
 }
 
@@ -25,5 +18,42 @@
 
 .form-button {
     box-shadow: 0 8px 32px 0 rgba(20, 20, 20, 0.596);
+    color: white;
+}
+
+.box-container {
+    position: relative;
+    height: 88vh;
+    width: 20vw;
+    border: 1px solid rgba(34, 34, 34, 0.5);
+}
+
+#brand-logo {
+    display: block;
+    margin: auto;
+    margin-top: 30vh;
+}
+
+#brand-name {
+    position: absolute;
+    transition: 0.5s ease;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    color: white;
+    font-size: 30px;
+    background-color: rgba(204, 204, 255, 0.1);
+    padding-top: 36vh;
+    text-align: center;
+}
+
+.box-container:hover #brand-name {
+    opacity: 1;
+    backdrop-filter: blur(30px);
+}
+
+.browser-window {
     color: white;
 }

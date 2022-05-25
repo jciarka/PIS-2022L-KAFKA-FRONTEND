@@ -1,51 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
-import '../../mystyles.css'
+import "../../mystyles.css"
+import selgrosLogo from "../../icons/selgros.jpg"
+import batmaidLogo from "../../icons/batmaid.webp"
+import orlenLogo from "../../icons/orlen.jpg"
+import pepsiLogo from "../../icons/pepsi.png"
+import dhlLogo from "../../icons/dhl.png"
 
 const suppliers = [
   {
     name: "Selgros",
-    path: "selgros"
+    path: "selgros",
+    logo: selgrosLogo
   },
   {
     name: "Pepsi",
-    path: "pepsi"
+    path: "pepsi",
+    logo: pepsiLogo
   },
   {
     name: "Orlen",
-    path: "orlen"
+    path: "orlen",
+    logo: orlenLogo
   },
   {
     name: "Batmaid",
-    path: "batmaid"
+    path: "batmaid",
+    logo: batmaidLogo
   },
   {
     name: "DHL",
-    path: "dhl"
+    path: "dhl",
+    logo: dhlLogo
   },
 ]
 
 var SuppliersList = ({type}) => {
   return (
     <>
-    <div class="container mt-4">
-      <div class="d-flex justify-content-between">
+    <div>
+      <div className="d-flex justify-content-center ml-0 mr-0 mt-0 row ">
         {
           suppliers.map(supplier => 
             <Link key={supplier.path} to={`/${type}/${supplier.path}`}> 
               <Box            
-                sx={{
-                  width: 200,
-                  height: 200,
-                  '&:hover': {
-                    opacity: [0.8, 0.7, 0.6],
-                  },
-                }}
-                className="d-flex justify-content-center align-items-center big panel"
+                className="box d-flex justify-content-center align-items-center"
                 >
-                  <div>
-                    <strong style={{color: "white", fontSize: "30px"}}>{supplier.name}</strong>
+                  <div className="box-container">
+                    <strong id="brand-name">{supplier.name}</strong>
+                    <img id="brand-logo" src={supplier.logo} style={{width: "10vw"}}></img>
                   </div>
               </Box>
           </Link>

@@ -48,7 +48,7 @@ const SelgrosList = () => {
         <FormControl fullWidth>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className="row d-flex justify-content-around">
-            <div className="px-2 col-3">
+            <div className="px-2 col-3" style={{color: "white"}}>
               <TextField
                 size="small"
                 value={ean}

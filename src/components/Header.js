@@ -1,6 +1,7 @@
+import { height } from "@mui/system";
 import React from "react";
 import { Link } from "react-router-dom";
-// import HomeIcon from "../icons/exit.svg";
+import "../mystyles.css"
 
 
 var Header = () => {
@@ -9,29 +10,29 @@ var Header = () => {
       {/*<!-- NAVBAR -->*/}
       <nav
         className="navbar navbar-expand-lg navbar-light shadow shadow-sm border-bottom border-dark"
-        style={{ border: "#8f8f8fb6" }}
+        style={{ border: "#8f8f8fb6", height: "12vh", padding: "0" }}
       >
         {/*<!-- Links -->*/}
         <div className="navbar-brand text-center m-0 p-0">
           <div className=" m-0 p-0">
             <div className="prompt" style = {
               {
-                'marginLeft': '20px',
-                'marginTop': '10px',
-                'fontSize':'25px',
+                'marginTop': '1.5vh',
+                'marginBottom': '1.5vh',
+                'fontSize':'3vh',
                 'color':'white'
               }
             }>
               {" "}
               <strong>Ordering app</strong>
             </div>
-            <div className="d-flex justify-content-start p-0">
+            <div className="d-flex p-0">
        
                 <>
                   <Link to="/customerApp">
                     <button
                       className="btn btn-dark nav-button small panel"
-                      style={{ position: "relative", top: "9px" }}
+                      style={{height: "4vh"}}
                     >
                       Customers App
                     </button>
@@ -39,7 +40,7 @@ var Header = () => {
                   <Link to="/aggregatorApp">
                     <button
                       className="btn btn-dark nav-button small panel"
-                      style={{ position: "relative", top: "9px" }}
+                      style={{height: "4vh"}}
                     >
                       Aggregated orders
                     </button>
