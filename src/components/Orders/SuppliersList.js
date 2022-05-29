@@ -25,11 +25,6 @@ const suppliers = [
     logo: orlenLogo
   },
   {
-    name: "Batmaid",
-    path: "batmaid",
-    logo: batmaidLogo
-  },
-  {
     name: "DHL",
     path: "dhl",
     logo: dhlLogo

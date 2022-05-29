@@ -26,14 +26,14 @@ const DhlOrderForm = ({
   
     const [pickupCountryCode, setPickupCountryCode] = useState(order ? order.pickupCountryCode : "");
     const validatePickupCountryCode = () => {
-      if (countryCode === "")
+      if (pickupCountryCode === "")
         return "Delivery address cannot be void";
       else return 0;
     };
 
     const [pickupCity, setPickupCity] = useState(order ? order.pickupCity : "");
     const validatePickupCity = () => {
-      if (city === "")
+      if (pickupCity === "")
         return "Delivery address cannot be void";
       else return 0;
     };
@@ -142,24 +142,24 @@ const DhlOrderForm = ({
     const [itemsNum, setItemsNum] = useState(0);
 
     const validateAll = () => {
-        if (validateCode() !== 0) return false;
-        if (validateContactPhone() !== 0) return false;
-        if (validateItems() !== 0) return false;
-        if (validateBuildingNumber() !== 0) return false;
-        if (validateCity() !== 0) return false;
-        if (validateCountryCode() !== 0) return false;
-        if (validateEan() !== 0) return false;
-        if (validateFlatNumber() !== 0) return false;
-        if (validatePostalCode() !== 0) return false;
-        if (validateQuantity() !== 0) return false;
-        // if (validatePickupBuildingNumber() !== 0) return false;
-        // if (validatePickupCity !== 0) return false;
-        // if (validatePickupCountryCode() !== 0) return false;
-        // if (validatePickupFlatNumber() !== 0) return false;
-        // if (validatePickupPostalCode() !== 0) return false;
-        // if (validatePickupStreet() !== 0) return false;
+      if (validateCode() !== 0) return false;
+      if (validateContactPhone() !== 0) return false;
+      if (validateItems() !== 0) return false;
+      if (validateBuildingNumber() !== 0) return false;
+      if (validateCity() !== 0) return false;
+      if (validateCountryCode() !== 0) return false;
+      if (validateEan() !== 0) return false;
+      if (validateFlatNumber() !== 0) return false;
+      if (validatePostalCode() !== 0) return false;
+      if (validateQuantity() !== 0) return false;
+      if (validatePickupBuildingNumber() !== 0) return false;
+      if (validatePickupCity() !== 0) return false;
+      if (validatePickupCountryCode() !== 0) return false;
+      if (validatePickupFlatNumber() !== 0) return false;
+      if (validatePickupPostalCode() !== 0) return false;
+      if (validatePickupStreet() !== 0) return false;
 
-        return true;
+      return true;
     };
 
     const validateItem = () => {
@@ -170,16 +170,16 @@ const DhlOrderForm = ({
       
     const submit = async () => {
         try {
-          const result = await axios.post(process.env.REACT_APP_BACKEND_PROD_URL + "/api/order/selgros", {
+          const result = await axios.post(process.env.REACT_APP_BACKEND_PROD_URL + "/api/order/dhl", {
             ...order,
             purchasersCode: Number(purchasersCode),
             pickupAddress: {
-                pickupCountryCode,
-                pickupCity,
-                pickupPostalCode,
-                pickupStreet,
-                pickupBuildingNumber,
-                pickupFlatNumber
+                "countryCode": pickupCountryCode,
+                "city": pickupCity,
+                "postalCode": pickupPostalCode,
+                "street": pickupStreet,
+                "buildingNumber": pickupBuildingNumber,
+                "flate": pickupFlatNumber
             },
             deliveryAddress: {
                 countryCode,
