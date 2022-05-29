@@ -18,7 +18,6 @@ var Header = () => {
             <div className="prompt" style = {
               {
                 'marginTop': '1.5vh',
-                'marginBottom': '1.5vh',
                 'fontSize':'3vh',
                 'color':'white'
               }
@@ -32,7 +31,7 @@ var Header = () => {
                   <Link to="/customerApp">
                     <button
                       className="btn btn-dark nav-button small panel"
-                      style={{height: "4vh"}}
+                      style={{marginBottom: "1vh"}}
                     >
                       Customers App
                     </button>
@@ -40,7 +39,7 @@ var Header = () => {
                   <Link to="/aggregatorApp">
                     <button
                       className="btn btn-dark nav-button small panel"
-                      style={{height: "4vh"}}
+                      style={{marginBottom: "1vh"}}
                     >
                       Aggregated orders
                     </button>
