@@ -17,7 +17,7 @@ import Paper from '@mui/material/Paper';
 
 import '../mystyles.css'
 
-const SelgrosList = () => {
+const DhlList = () => {
   const [items, setItems] = useState([]);
   let counter = 0;
 
@@ -29,7 +29,7 @@ const SelgrosList = () => {
 
   const fetchItems = async () => {
     let result;
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', { params: {dateFrom, dateTo, purchasersCode, ean}});
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/dhl/items', { params: {dateFrom, dateTo, purchasersCode, ean}});
     console.log(result.data.items);
     setItems(result.data.items)
   };
@@ -42,7 +42,7 @@ const SelgrosList = () => {
         style={{ border: "#8f8f8fb6" }}
       >
         <div className="row justify-content-center mb-2">
-          <h5>Search ordered Selgros items</h5>
+          <h5>Search ordered DHL items</h5>
         </div>
 
         <FormControl fullWidth>
@@ -152,4 +152,4 @@ const SelgrosList = () => {
   );
 };
 
-export default SelgrosList;
+export default DhlList;

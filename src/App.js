@@ -7,6 +7,10 @@ import SelgrosList from './lists/SelgrosList';
 import Header from './components/Header'
 import SuppliersList from './components/Orders/SuppliersList'
 
+import './App.css'
+import DhlOrderForm from './forms/DhlOrderForm';
+import DhlList from './lists/DhlList';
+
 export const fetchSelgrosOrderExample = async query => {
   const url = process.env.REACT_APP_BACKEND_PROD_URL + '/api/test/SelgrosOrderExample';
 
@@ -31,6 +35,8 @@ useEffect(() => {
       <Routes>
         <Route path="/customerApp/selgros" element={<SelgrosOrderForm />} />
         <Route path="/aggregatorApp/selgros" element={<SelgrosList />} />
+        <Route path="/customerApp/dhl" element={<DhlOrderForm/>} />
+        <Route path="/aggregatorApp/dhl" element={<DhlList />} />
         <Route path="/customerapp" element={<SuppliersList type={"customerApp"} />} />
         <Route path="/aggregatorapp" element={<SuppliersList type={"aggregatorApp"}/>} />
       </Routes>

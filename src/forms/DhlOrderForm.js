@@ -11,7 +11,7 @@ export const editorTypes = {
     NEW: "NEW",
 };
 
-const SelgrosOrderForm = ({ 
+const DhlOrderForm = ({ 
     order = null,
     onSuccess = null,
     type = editorTypes.NEW,
@@ -24,6 +24,46 @@ const SelgrosOrderForm = ({
       else return 0;
     };
   
+    const [pickupCountryCode, setPickupCountryCode] = useState(order ? order.pickupCountryCode : "");
+    const validatePickupCountryCode = () => {
+      if (pickupCountryCode === "")
+        return "Delivery address cannot be void";
+      else return 0;
+    };
+
+    const [pickupCity, setPickupCity] = useState(order ? order.pickupCity : "");
+    const validatePickupCity = () => {
+      if (pickupCity === "")
+        return "Delivery address cannot be void";
+      else return 0;
+    };
+
+    const [pickupPostalCode, setPickupPostalCode] = useState(order ? order.pickupPostalCode : "");
+    const validatePickupPostalCode = () => {
+      if (pickupPostalCode === "")
+        return "Delivery address cannot be void";
+      else return 0;
+    };
+
+    const [pickupStreet, setPickupStreet] = useState(order ? order.pickupStreet : "");
+    const validatePickupStreet = () => {
+      if (pickupStreet === "")
+        return "Delivery address cannot be void";
+      else return 0;
+    };
+    
+    const [pickupBuildingNumber, setPickupBuildingNumber] = useState(order ? order.pickupBuildingNumber : "");
+    const validatePickupBuildingNumber = () => {
+      if (pickupBuildingNumber === "")
+        return "Delivery address cannot be void";
+      else return 0;
+    };
+
+    const [pickupFlatNumber, setPickupFlatNumber] = useState(order ? order.pickupFlatNumber : "");
+    const validatePickupFlatNumber = () => {
+      return 0;
+    };
+
     const [countryCode, setCountryCode] = useState(order ? order.countryCode : "");
     const validateCountryCode = () => {
       if (countryCode === "")
@@ -112,20 +152,35 @@ const SelgrosOrderForm = ({
       if (validateFlatNumber() !== 0) return false;
       if (validatePostalCode() !== 0) return false;
       if (validateQuantity() !== 0) return false;
+      if (validatePickupBuildingNumber() !== 0) return false;
+      if (validatePickupCity() !== 0) return false;
+      if (validatePickupCountryCode() !== 0) return false;
+      if (validatePickupFlatNumber() !== 0) return false;
+      if (validatePickupPostalCode() !== 0) return false;
+      if (validatePickupStreet() !== 0) return false;
+
       return true;
     };
 
     const validateItem = () => {
-      if (validateEan() !== 0) return false;
-      if (validateQuantity() !== 0) return false;
-      return true;
+        if (validateEan() !== 0) return false;
+        if (validateQuantity() !== 0) return false;
+        return true;
     };
       
     const submit = async () => {
         try {
-          const result = await axios.post(process.env.REACT_APP_BACKEND_PROD_URL + "/api/order/selgros", {
+          const result = await axios.post(process.env.REACT_APP_BACKEND_PROD_URL + "/api/order/dhl", {
             ...order,
             purchasersCode: Number(purchasersCode),
+            pickupAddress: {
+                "countryCode": pickupCountryCode,
+                "city": pickupCity,
+                "postalCode": pickupPostalCode,
+                "street": pickupStreet,
+                "buildingNumber": pickupBuildingNumber,
+                "flate": pickupFlatNumber
+            },
             deliveryAddress: {
                 countryCode,
                 city,
@@ -142,6 +197,12 @@ const SelgrosOrderForm = ({
     
           if (result) 
           {
+            setPickupBuildingNumber("");
+            setPickupCity("");
+            setPickupCountryCode("");
+            setPickupFlatNumber("");
+            setPickupPostalCode("");
+            setPickupStreet("");
             setBuildingNumber("");
             setCity("");
             setContactPhone("");
@@ -181,7 +242,7 @@ const SelgrosOrderForm = ({
           style={{ border: "#8f8f8fb6" }}
         >
           <div className="m-2 w-100 text-center">
-            <h3>New Selgros order</h3>
+            <h3>New DHL order</h3>
           </div>
 
           <div className="form-row mt-1">          
@@ -195,6 +256,94 @@ const SelgrosOrderForm = ({
                 onChange={(e) => {
                   setPurchasersCode(e.target.value);
                   validateCode();
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="mt-4 mb-1 w-100 text-center" id="section-header">
+            <h6>Pickup address</h6>
+          </div>
+
+          <div className="form-row mb-2">
+            <div className="col-3">
+              <label htmlFor="name">Country code</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="PL"
+                value={pickupCountryCode}
+                onChange={(e) => {
+                  setPickupCountryCode(e.target.value);
+                  validatePickupCountryCode();
+                }}
+              />
+            </div>
+            <div className="col-6">
+              <label htmlFor="name">City</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Warsaw"
+                value={pickupCity}
+                onChange={(e) => {
+                  setPickupCity(e.target.value);
+                  validatePickupCity();
+                }}
+              />
+            </div>
+            <div className="col-3">
+              <label htmlFor="name">Postal code</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="01-001"
+                value={pickupPostalCode}
+                onChange={(e) => {
+                  setPickupPostalCode(e.target.value);
+                  validatePickupPostalCode();
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="form-row mb-2">
+            <div className="col-6">
+              <label htmlFor="name">Street</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Nowowiejska"
+                value={pickupStreet}
+                onChange={(e) => {
+                  setPickupStreet(e.target.value);
+                  validatePickupStreet();
+                }}
+              />
+            </div>
+            <div className="col-3">
+              <label htmlFor="name">Building number</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="15/19"
+                value={pickupBuildingNumber}
+                onChange={(e) => {
+                  setPickupBuildingNumber(e.target.value);
+                  validatePickupBuildingNumber();
+                }}
+              />
+            </div>
+            <div className="col-3">
+              <label htmlFor="name">Flat number</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="3"
+                value={pickupFlatNumber}
+                onChange={(e) => {
+                  setPickupFlatNumber(e.target.value);
+                  validatePickupFlatNumber();
                 }}
               />
             </div>
@@ -236,7 +385,7 @@ const SelgrosOrderForm = ({
               <input
                 type="text"
                 className="form-control"
-                placeholder="01-001"
+                placeholder="01-000"
                 value={postalCode}
                 onChange={(e) => {
                   setPostalCode(e.target.value);
@@ -396,4 +545,4 @@ const SelgrosOrderForm = ({
   };
   
 
-export default SelgrosOrderForm;
+export default DhlOrderForm;
