@@ -51,7 +51,7 @@ const SelgrosList = () => {
     } else if(reportType === 'Top Purchaser by orders'){
       url = '/clients/byOrders'
     }
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports' + url, { responseType: 'blob', params: {dateFromReport, dateToReport, limit}});
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports' + url, { responseType: 'blob', params: {dateFrom, dateTo, limit}});
     console.log(result);
     if(result.status === 200 ) {
       fileDownload(result.data, 'report.pdf')
@@ -60,10 +60,7 @@ const SelgrosList = () => {
 
   const fetchExcelReport = async () => {
     let result;
-    // result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports/excel?dateFrom=2000-10-31T01:30:00.000-05:00&dateTo=2022-10-31T01:30:00.000-05:00');
-    // result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports/excel?dateFrom=2000-10-31T01:00:00&dateTo=2022-10-31T01:30:00');
-    // result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports/excel?dateFrom=2000-10-31T01:30:00.000-05:00&dateTo=2022-10-31T01:30:00.000-05:00', { responseType: 'blob'});
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports/excel', { responseType: 'blob', params: {dateFromSpreadsheet, dateToSpreadsheet}});
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports/excel', { responseType: 'blob', params: {dateFrom, dateTo}});
     console.log(result);
     if(result.status === 200 ) {
       fileDownload(result.data, 'report.xlsx')
@@ -73,149 +70,6 @@ const SelgrosList = () => {
   return (
     <div className="container">
       
-      <div
-      className="card m-4 p-4 rounded rounded-lg w-100 shadow border rounded-0"
-      style={{ border: "#8f8f8fb6" }}
-      >
-        <div className="row justify-content-center mb-2">
-          <h5>Excel Reports</h5>
-        </div>
-        
-          <FormControl fullWidth>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-          <div className="row d-flex justify-content-around">
-
-            <div className="px-2 col-3">
-              <DatePicker
-                size="small"
-                clearable
-                label="Date from"
-                inputFormat="YYYY-MM-DD"
-                value={dateFromSpreadsheet}
-                onChange={e => e ? setDateFromSpreadsheet(dayjs(e).format('YYYY-MM-DDTHH:mm:ss')) : setDateFromSpreadsheet(null)}
-                renderInput={(params) => <TextField size="small" { ...params} />}
-              />
-            </div>
-            <div className="px-2 col-3">
-              <DatePicker
-                size="small"
-                label="Date to"
-                clearable
-                inputFormat="YYYY-MM-DD"
-                value={dateToSpreadsheet}
-                onChange={e => e ? setDateToSpreadsheet(dayjs(e).format('YYYY-MM-DDTHH:mm:ss')) : setDateToSpreadsheet(null)}
-                renderInput={(params) => <TextField  value={"text"} size="small" {...params} />}
-              />
-            </div>
-          </div>
-          </LocalizationProvider>
-        </FormControl>
-
-        <div className="row justify-content-end">
-          <Button 
-            size="small" 
-            disableElevation={true} 
-            variant="contained" 
-            className="mt-2 mb-0 pb-0"
-            onClick={fetchExcelReport}
-            >
-              Download Spreadsheet
-            </Button>
-        </div>
-        </div>
-      
-      
-      
-      
-      <div
-      className="card m-4 p-4 rounded rounded-lg w-100 shadow border rounded-0"
-      style={{ border: "#8f8f8fb6" }}
-      >
-        <div className="row justify-content-center mb-2">
-          <h5>PDF Reports</h5>
-        </div>
-        
-          <FormControl fullWidth>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-          <div className="row d-flex justify-content-around">
-            
-
-
-
-          
-
-            <div className="px-2 col-3">
-            <TextField
-              id="outlined-basic"
-              select
-              label="Report type"
-              value={reportType}
-              onChange={(e) => {
-                e.target.value !== "" ? setreportType(e.target.value) : setreportType(null);
-              }}
-              helperText="Select report type"
-            >
-              <MenuItem value={'Top products'}>Top products</MenuItem>
-              <MenuItem value={'Top Purchaser by items'}>Top Purchaser by items</MenuItem>
-              <MenuItem value={'Top Purchaser by orders'}>Top Purchaser by orders</MenuItem>
-            </TextField>
-            
-            </div>
-            <div className="px-2 col-3">
-              <TextField
-                size="small"
-                value={limit}
-                id="outlined-basic"
-                label="Limit"
-                variant="outlined"
-                onChange={(e) => {
-                  e.target.value !== "" ? setLimit(e.target.value) : setLimit(null);
-                }}
-              />
-            </div>
-            <div className="px-2 col-3">
-              <DatePicker
-                size="small"
-                clearable
-                label="Date from"
-                inputFormat="YYYY-MM-DD"
-                value={dateFromReport}
-                onChange={e => e ? setDateFromReport(dayjs(e).format('YYYY-MM-DDTHH:mm:ss')) : setDateFromReport(null)}
-                renderInput={(params) => <TextField size="small" { ...params} />}
-              />
-            </div>
-            <div className="px-2 col-3">
-              <DatePicker
-                size="small"
-                label="Date to"
-                clearable
-                inputFormat="YYYY-MM-DD"
-                value={dateToReport}
-                onChange={e => e ? setDateToReport(dayjs(e).format('YYYY-MM-DDTHH:mm:ss')) : setDateToReport(null)}
-                renderInput={(params) => <TextField  value={"text"} size="small" {...params} />}
-              />
-            </div>
-          </div>
-          </LocalizationProvider>
-        </FormControl>
-
-        <div className="row justify-content-end">
-          <Button 
-            size="small" 
-            disableElevation={true} 
-            variant="contained" 
-            className="mt-2 mb-0 pb-0"
-            onClick={fetchPDFReport}
-            >
-              Download Report
-            </Button>
-        </div>
-        </div>
-
-
-
       <div
         className="card m-4 p-4 rounded rounded-lg w-100 shadow border rounded-0"
         style={{ border: "#8f8f8fb6" }}
@@ -259,7 +113,7 @@ const SelgrosList = () => {
                 label="Date from"
                 inputFormat="YYYY-MM-DD"
                 value={dateFrom}
-                onChange={e => e ? setDateFrom(dayjs(e).format('YYYY-MM-DDTHH:mm:ss')) : setDateFrom(null)}
+                onChange={e => e ? setDateFrom(dayjs(e).format('YYYY-MM-DDTHH:mm:ss.sssZ')) : setDateFrom(null)}
                 renderInput={(params) => <TextField size="small" { ...params} />}
               />
             </div>
@@ -270,7 +124,7 @@ const SelgrosList = () => {
                 clearable
                 inputFormat="YYYY-MM-DD"
                 value={dateTo}
-                onChange={e => e ? setDateTo(dayjs(e).format('YYYY-MM-DDTHH:mm:ss')) : setDateTo(null)}
+                onChange={e => e ? setDateTo(dayjs(e).format('YYYY-MM-DDTHH:mm:ss.sssZ')) : setDateTo(null)}
                 renderInput={(params) => <TextField  value={"text"} size="small" {...params} />}
               />
             </div>
@@ -289,7 +143,78 @@ const SelgrosList = () => {
               Search
             </Button>
         </div>
-      </div>
+        <div className="row justify-content-center mb-2">
+          <h5>Excel Report</h5>
+        </div>
+        <div className="row justify-content-end">
+          <Button 
+            size="small" 
+            disableElevation={true} 
+            variant="contained" 
+            className="mt-2 mb-0 pb-0"
+            onClick={fetchExcelReport}
+            >
+              Download Spreadsheet
+            </Button>
+        </div>
+      
+      
+      <div className="row justify-content-center mb-2">
+          <h5>PDF Report</h5>
+        </div>
+        
+          <FormControl fullWidth>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+          <div className="row d-flex justify-content-around">
+            <div className="px-2 col-3">
+            <TextField
+              id="outlined-basic"
+              select
+              label="Report type"
+              value={reportType}
+              onChange={(e) => {
+                e.target.value !== "" ? setreportType(e.target.value) : setreportType(null);
+              }}
+              helperText="Select report type"
+            >
+              <MenuItem value={'Top products'}>Top products</MenuItem>
+              <MenuItem value={'Top Purchaser by items'}>Top Purchaser by items</MenuItem>
+              <MenuItem value={'Top Purchaser by orders'}>Top Purchaser by orders</MenuItem>
+            </TextField>
+            
+            </div>
+            <div className="px-2 col-3">
+              <TextField
+                size="small"
+                value={limit}
+                id="outlined-basic"
+                label="Entries limit "
+                variant="outlined"
+                onChange={(e) => {
+                  e.target.value !== "" ? setLimit(e.target.value) : setLimit(null);
+                }}
+              />
+            </div>
+            
+          </div>
+          </LocalizationProvider>
+        </FormControl>
+
+        <div className="row justify-content-end">
+          <Button 
+            size="small" 
+            disableElevation={true} 
+            variant="contained" 
+            className="mt-2 mb-0 pb-0"
+            onClick={fetchPDFReport}
+            >
+              Download Report
+            </Button>
+        </div>          
+      </div>          
+
+
 
       {
         items && items.length > 0 &&
