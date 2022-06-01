@@ -125,17 +125,31 @@ const DhlOrderForm = ({
       else return 0;
     };
 
-    const [ean, setEan] = useState("");
-    const validateEan = () => {
-      if (ean === "")
-        return "Ean cannot be void";
+    const [weight, setWeight] = useState("");
+    const validateWeight = () => {
+      if (weight === "" || isNaN(Number(weight)))
+        return "Weight cannot be void";
       else return 0;
     };
 
-    const [quantity, setQuantity] = useState("");
-    const validateQuantity = () => {
-      if (quantity === "" || isNaN(Number(quantity)))
-        return "Quantity cannot be void";
+    const [width, setWidth] = useState("");
+    const validateWidth = () => {
+      if (width === "" || isNaN(Number(width)))
+        return "Width cannot be void";
+      else return 0;
+    };
+
+    const [length, setLength] = useState("");
+    const validateLength = () => {
+      if (length === "" || isNaN(Number(length)))
+        return "Length cannot be void";
+      else return 0;
+    };
+
+    const [height, setHeight] = useState("");
+    const validateHeight = () => {
+      if (height === "" || isNaN(Number(height)))
+        return "Height cannot be void";
       else return 0;
     };
 
@@ -148,10 +162,8 @@ const DhlOrderForm = ({
       if (validateBuildingNumber() !== 0) return false;
       if (validateCity() !== 0) return false;
       if (validateCountryCode() !== 0) return false;
-      if (validateEan() !== 0) return false;
       if (validateFlatNumber() !== 0) return false;
       if (validatePostalCode() !== 0) return false;
-      if (validateQuantity() !== 0) return false;
       if (validatePickupBuildingNumber() !== 0) return false;
       if (validatePickupCity() !== 0) return false;
       if (validatePickupCountryCode() !== 0) return false;
@@ -163,8 +175,10 @@ const DhlOrderForm = ({
     };
 
     const validateItem = () => {
-        if (validateEan() !== 0) return false;
-        if (validateQuantity() !== 0) return false;
+        if (validateWeight() !== 0) return false;
+        if (validateWidth() !== 0) return false;
+        if (validateLength() !== 0) return false;
+        if (validateHeight() !== 0) return false;
         return true;
     };
       
@@ -191,6 +205,7 @@ const DhlOrderForm = ({
             },
             contactPhone: Number(contactPhone),
             createdAt: dayjs().format('YYYY-MM-DDTHH:mm:ss').toString(),
+            requiredDeliveryDate: dayjs().format('YYYY-MM-DDTHH:mm:ss').toString(),
             items,
             remarks
           });
@@ -207,12 +222,14 @@ const DhlOrderForm = ({
             setCity("");
             setContactPhone("");
             setCountryCode("");
-            setEan("");
+            setWeight("");
+            setWidth("");
+            setLength("");
+            setHeight("");
             setFlatNumber("");
             setItems([]);
             setPostalCode("");
             setPurchasersCode("");
-            setQuantity("");
             setRemarks("");
             setStreet("");
           }    
@@ -223,12 +240,12 @@ const DhlOrderForm = ({
     };
 
     const addItem = async() => {
-      items.push({quantity: Number(quantity), ean: ean});
+      items.push({weight: Number(weight), width: Number(width), length: Number(length), height: Number(height)});
       setItemsNum(itemsNum + 1)
     };
 
     const removeItem = async() => {
-      items.pop({quantity: Number(quantity), ean: ean});
+      items.pop({weight: Number(weight), width: Number(width), length: Number(length), height: Number(height)});
       setItemsNum(itemsNum - 1)
     };
   
@@ -459,28 +476,55 @@ const DhlOrderForm = ({
 
           <div className="form-row">
             <div className="col-5">
-              <label htmlFor="name">Ean</label>
+              <label htmlFor="name">Weight</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="5012345678900"
-                value={ean}
+                placeholder="12"
+                value={weight}
                 onChange={(e) => {
-                  setEan(e.target.value);
-                  validateEan();
+                  setWeight(e.target.value);
+                  validateWeight();
                 }}
               />
             </div>
             <div className="col-5">
-              <label htmlFor="name">Quantity</label>
+              <label htmlFor="name">Width</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="1"
-                value={quantity}
+                placeholder="250"
+                value={width}
                 onChange={(e) => {
-                  setQuantity(e.target.value);
-                  validateQuantity();
+                  setWidth(e.target.value);
+                  validateWidth();
+                }}
+              />
+            </div>
+
+            <div className="col-5">
+              <label htmlFor="name">Length</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="78"
+                value={length}
+                onChange={(e) => {
+                  setLength(e.target.value);
+                  validateLength();
+                }}
+              />
+            </div>
+            <div className="col-5">
+              <label htmlFor="name">Height</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="60"
+                value={height}
+                onChange={(e) => {
+                  setHeight(e.target.value);
+                  validateHeight();
                 }}
               />
             </div>
@@ -500,12 +544,18 @@ const DhlOrderForm = ({
           {items.map((item) => {
             return (
               <div className="row mt-2">
-                <div className="col-5">
-                  Ean: {item.ean}             
+                <div className="col-2">
+                  Weight: {item.weight}             
                 </div>
-                <div className="col-5">
-                  Quantity: {item.quantity} 
+                <div className="col-2">
+                  Width: {item.width} 
                 </div>
+                <div className="col-2">
+                  Length: {item.length}             
+                </div>
+                <div className="col-2">
+                  Height: {item.height} 
+                </div>                
                 <CancelIcon width="1.5rem" onClick={(e) => removeItem()}/>
               </div>
 

@@ -21,15 +21,22 @@ const DhlList = () => {
   const [items, setItems] = useState([]);
   let counter = 0;
 
-  const [ean, setEan] = useState(null);
   const [purchasersCode, setPurchasersCode] = useState(null);
   const [dateFrom, setDateFrom] = useState(null);
   const [dateTo, setDateTo] = useState(null);
+  const [weightFrom, setWeightFrom] = useState(null);
+  const [weightTo, setWeightTo] = useState(null);
+  const [widthFrom, setWidthFrom] = useState(null);
+  const [widthTo, setWidthTo] = useState(null);
+  const [lengthFrom, setLengthFrom] = useState(null);
+  const [lengthTo, setLengthTo] = useState(null);
+  const [heightFrom, setHeightFrom] = useState(null);
+  const [heightTo, setHeightTo] = useState(null);
 
 
   const fetchItems = async () => {
     let result;
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/dhl/items', { params: {dateFrom, dateTo, purchasersCode, ean}});
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/dhl/items', { params: {dateFrom, dateTo, purchasersCode, weightFrom, weightTo, widthFrom, widthTo, lengthFrom, lengthTo, heightFrom, heightTo}});
     console.log(result.data.items);
     setItems(result.data.items)
   };
@@ -48,18 +55,6 @@ const DhlList = () => {
         <FormControl fullWidth>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className="row d-flex justify-content-around">
-            <div className="px-2 col-3" style={{color: "white"}}>
-              <TextField
-                size="small"
-                value={ean}
-                id="outlined-basic"
-                label="EAN"
-                variant="outlined"
-                onChange={(e) => {
-                  e.target.value !== "" ? setEan(e.target.value) : setEan(null);
-                }}
-              />
-            </div>
             <div className="px-2 col-3">
               <TextField
                 size="small"
@@ -125,8 +120,14 @@ const DhlList = () => {
               <TableRow>
                 <TableCell align="center">Num.</TableCell>
                 <TableCell align="center">Purchaser</TableCell>
-                <TableCell align="center">EAN</TableCell>
-                <TableCell align="center">Quantity</TableCell>
+                <TableCell align="center">Weight from</TableCell>
+                <TableCell align="center">Weight to</TableCell>
+                <TableCell align="center">Width from</TableCell>
+                <TableCell align="center">Width to</TableCell>
+                <TableCell align="center">Length from</TableCell>
+                <TableCell align="center">Length to</TableCell>
+                <TableCell align="center">Height from</TableCell>
+                <TableCell align="center">Height to</TableCell>                                
                 <TableCell align="center">Recieved at</TableCell>
               </TableRow>
             </TableHead>
@@ -138,8 +139,14 @@ const DhlList = () => {
                 >
                   <TableCell align="center">{i + 1}.</TableCell>
                   <TableCell align="center">{row.purchasersCode}</TableCell>
-                  <TableCell align="center">{row.ean}</TableCell>
-                  <TableCell align="center">{row.quantity}</TableCell>
+                  <TableCell align="center">{row.weightFrom}</TableCell>
+                  <TableCell align="center">{row.weightTo}</TableCell>
+                  <TableCell align="center">{row.widthFrom}</TableCell>
+                  <TableCell align="center">{row.widthTo}</TableCell>
+                  <TableCell align="center">{row.lengthFrom}</TableCell>
+                  <TableCell align="center">{row.lengthTo}</TableCell>
+                  <TableCell align="center">{row.heightFrom}</TableCell>
+                  <TableCell align="center">{row.heightTo}</TableCell>                                    
                   <TableCell align="center">{row.recievedAt && row.recievedAt.replace("T", " at ")}</TableCell>
                 </TableRow>
               ))}
