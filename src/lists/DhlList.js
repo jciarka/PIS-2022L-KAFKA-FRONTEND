@@ -14,14 +14,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import fileDownload from 'js-file-download';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import '../mystyles.css'
 
-const SelgrosList = () => {
+const DhlList = () => {
   const [items, setItems] = useState([]);
   let counter = 0;
 
@@ -29,58 +25,26 @@ const SelgrosList = () => {
   const [purchasersCode, setPurchasersCode] = useState(null);
   const [dateFrom, setDateFrom] = useState(null);
   const [dateTo, setDateTo] = useState(null);
-  const [dateFromReport, setDateFromReport] = useState(null);
-  const [dateToReport, setDateToReport] = useState(null);
-  const [reportType, setreportType] = useState('Top Purchaser by orders');
-  const [dateFromSpreadsheet, setDateFromSpreadsheet] = useState(null);
-  const [dateToSpreadsheet, setDateToSpreadsheet] = useState(null);
-  const [limit, setLimit] = useState(null);
+
 
   const fetchItems = async () => {
     let result;
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/selgros/items', { params: {dateFrom, dateTo, purchasersCode, ean}});
+    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/order/dhl/items', { params: {dateFrom, dateTo, purchasersCode, ean}});
     console.log(result.data.items);
     setItems(result.data.items)
   };
 
-  const fetchPDFReport = async () => {
-    let result;
-    let url;
-    if(reportType === 'Top products'){
-      url = '/products'
-    } else if(reportType === 'Top Purchaser by items'){
-      url = '/clients/byItems'
-    } else if(reportType === 'Top Purchaser by orders'){
-      url = '/clients/byOrders'
-    }
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports' + url, { responseType: 'blob', params: {dateFrom, dateTo, limit}});
-    console.log(result);
-    if(result.status === 200 ) {
-      fileDownload(result.data, 'report.pdf')
-    }
-  };
-
-  const fetchExcelReport = async () => {
-    let result;
-    result = await axios.get(process.env.REACT_APP_BACKEND_CONS_URL + '/api/reports/excel', { responseType: 'blob', params: {dateFrom, dateTo}});
-    console.log(result);
-    if(result.status === 200 ) {
-      fileDownload(result.data, 'report.xlsx')
-    }
-  };
 
   return (
     <div className="container">
-      
       <div
         className="card m-4 p-4 w-100 big panel"
         style={{ border: "#8f8f8fb6" }}
       >
         <div className="row justify-content-center mb-2">
-          <h5>Search ordered Selgros items</h5>
+          <h5>Search ordered DHL items</h5>
         </div>
 
-        
         <FormControl fullWidth>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className="row d-flex justify-content-around">
@@ -115,7 +79,7 @@ const SelgrosList = () => {
                 label="Date from"
                 inputFormat="YYYY-MM-DD"
                 value={dateFrom}
-                onChange={e => e ? setDateFrom(dayjs(e).format('YYYY-MM-DDTHH:mm:ss.sssZ')) : setDateFrom(null)}
+                onChange={e => e ? setDateFrom(dayjs(e).format('YYYY-MM-DDTHH:mm:ss')) : setDateFrom(null)}
                 renderInput={(params) => <TextField size="small" { ...params} />}
               />
             </div>
@@ -145,78 +109,7 @@ const SelgrosList = () => {
               Search
             </Button>
         </div>
-        <div className="row justify-content-center mb-2">
-          <h5>Excel Report</h5>
-        </div>
-        <div className="row justify-content-end">
-          <Button 
-            size="small" 
-            disableElevation={true} 
-            variant="contained" 
-            className="mt-2 mb-0 pb-0"
-            onClick={fetchExcelReport}
-            >
-              Download Spreadsheet
-            </Button>
-        </div>
-      
-      
-      <div className="row justify-content-center mb-2">
-          <h5>PDF Report</h5>
-        </div>
-        
-          <FormControl fullWidth>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-          <div className="row d-flex justify-content-around">
-            <div className="px-2 col-3">
-            <TextField
-              id="outlined-basic"
-              select
-              label="Report type"
-              value={reportType}
-              onChange={(e) => {
-                e.target.value !== "" ? setreportType(e.target.value) : setreportType(null);
-              }}
-              helperText="Select report type"
-            >
-              <MenuItem value={'Top products'}>Top products</MenuItem>
-              <MenuItem value={'Top Purchaser by items'}>Top Purchaser by items</MenuItem>
-              <MenuItem value={'Top Purchaser by orders'}>Top Purchaser by orders</MenuItem>
-            </TextField>
-            
-            </div>
-            <div className="px-2 col-3">
-              <TextField
-                size="small"
-                value={limit}
-                id="outlined-basic"
-                label="Entries limit "
-                variant="outlined"
-                onChange={(e) => {
-                  e.target.value !== "" ? setLimit(e.target.value) : setLimit(null);
-                }}
-              />
-            </div>
-            
-          </div>
-          </LocalizationProvider>
-        </FormControl>
-
-        <div className="row justify-content-end">
-          <Button 
-            size="small" 
-            disableElevation={true} 
-            variant="contained" 
-            className="mt-2 mb-0 pb-0"
-            onClick={fetchPDFReport}
-            >
-              Download Report
-            </Button>
-        </div>          
-      </div>          
-
-
+      </div>
 
       {
         items && items.length > 0 &&
@@ -259,4 +152,4 @@ const SelgrosList = () => {
   );
 };
 
-export default SelgrosList;
+export default DhlList;
